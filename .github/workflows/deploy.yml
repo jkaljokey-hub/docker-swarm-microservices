@@ -1,0 +1,77 @@
+name: Docker Swarm CI/CD
+
+on:
+  push:
+    branches:
+      - main
+
+env:
+  IMAGE_TAG: ${{ github.sha }}
+
+jobs:
+
+  deploy:
+
+    runs-on: ubuntu-latest
+
+    steps:
+
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Login to Docker Hub
+        uses: docker/login-action@v3
+        with:
+          username: ${{ secrets.DOCKER_USERNAME }}
+          password: ${{ secrets.DOCKER_PASSWORD }}
+
+      ####################################################
+      # Build API
+      ####################################################
+
+      - name: Build API
+        run: |
+          docker build \
+          -t abuabakaralnour/blog-api:${IMAGE_TAG} \
+          ./api
+
+      - name: Push API
+        run: |
+          docker push abuabakaralnour/blog-api:${IMAGE_TAG}
+
+      ####################################################
+      # Build Frontend
+      ####################################################
+
+      - name: Build Frontend
+        run: |
+          docker build \
+          -t abuabakaralnour/blog-frontend:${IMAGE_TAG} \
+          ./frontend
+
+      - name: Push Frontend
+        run: |
+          docker push abuabakaralnour/blog-frontend:${IMAGE_TAG}
+
+      ####################################################
+      # SSH Deploy
+      ####################################################
+
+      - name: Deploy to Swarm
+        uses: appleboy/ssh-action@v1.2.2
+
+        with:
+          host: ${{ secrets.EC2_HOST }}
+          username: ${{ secrets.EC2_USER }}
+          key: ${{ secrets.EC2_SSH_KEY }}
+
+          script: |
+
+            cd ~/blog-project
+
+            export IMAGE_TAG=${{ github.sha }}
+
+            docker stack deploy \
+              --with-registry-auth \
+              -c stack.yml \
+              blog

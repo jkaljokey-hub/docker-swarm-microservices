@@ -3,7 +3,8 @@ version: "3.9"
 services:
 
   frontend:
-    image: abuabakaralnour/blog-frontend:v6
+    frontend:
+    image: abuabakaralnour/blog-frontend:${IMAGE_TAG}
     ports:
       - "80:80"
     networks:
@@ -12,7 +13,8 @@ services:
       replicas: 2
 
   api:
-    image: abuabakaralnour/blog-api:v10
+    api:
+    image: abuabakaralnour/blog-api:${IMAGE_TAG}
     secrets:
       - db_password
     networks:
