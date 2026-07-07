@@ -27,7 +27,7 @@ const redis = createClient({
 async function start() {
   try {
     await db.connect();
-    console.log("✅ Connected to PostgreSQL Database");
+    console.log("✅ Connectedd to PostgreSQL Database");
 
     await redis.connect();
     console.log("✅ Connected to Redis Database");
