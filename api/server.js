@@ -30,7 +30,7 @@ async function start() {
     console.log("✅ Connected to PostgreSQL Database");
 
     await redis.connect();
-    console.log("✅ Connecsted to Redis Database");
+    console.log("✅ Connecstedd to Redis Database");
 
     await db.query(`
       CREATE TABLE IF NOT EXISTS posts(
