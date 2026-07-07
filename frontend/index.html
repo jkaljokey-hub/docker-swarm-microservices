@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Docker Swarm Demo</title>
+
+    <style>
+
+        body{
+            font-family:Arial;
+            background:#f4f4f4;
+        }
+
+        .card{
+            width:600px;
+            margin:80px auto;
+            background:white;
+            padding:30px;
+            border-radius:10px;
+            box-shadow:0 0 10px rgba(0,0,0,.2);
+        }
+
+        li{
+            margin:10px;
+        }
+
+    </style>
+
+</head>
+
+<body>
+
+<div class="card">
+
+<h1>Docker Swarm Blog</h1>
+
+<h3 id="status">Loading...</h3>
+
+<p id="host"></p>
+
+<div id="posts"></div>
+
+</div>
+
+<script>
+
+async function load(){
+
+    const response = await fetch("/api/posts");
+
+    const data = await response.json();
+
+    document.getElementById("status").innerHTML =
+        "Loaded From : " + data.source;
+
+    document.getElementById("host").innerHTML =
+        "Container : " + data.hostname;
+
+    let html="<ul>";
+
+    data.posts.forEach(post=>{
+
+        html += `<li>${post.title}</li>`;
+
+    });
+
+    html+="</ul>";
+
+    document.getElementById("posts").innerHTML=html;
+
+}
+
+load();
+
+</script>
+
+</body>
+
+</html>
