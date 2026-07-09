@@ -3,8 +3,7 @@ version: "3.9"
 services:
 
   frontend:
-    frontend:
-    image: abuabakaralnour/blog-frontend:${IMAGE_TAG}
+    image: abuabakaralnour/blog-frontend:v23
     ports:
       - "80:80"
     networks:
@@ -13,8 +12,7 @@ services:
       replicas: 2
 
   api:
-    api:
-    image: abuabakaralnour/blog-api:${IMAGE_TAG}
+    image: abuabakaralnour/blog-api:v22
     secrets:
       - db_password
     networks:
@@ -42,10 +40,8 @@ services:
       POSTGRES_DB: blog
       POSTGRES_USER: bloguser
       POSTGRES_PASSWORD_FILE: /run/secrets/db_password
-
     secrets:
       - db_password
-
     volumes:
       - postgres-data:/var/lib/postgresql/data
     networks:
@@ -59,7 +55,6 @@ services:
 networks:
   frontend:
     driver: overlay
-
   backend:
     driver: overlay
 
