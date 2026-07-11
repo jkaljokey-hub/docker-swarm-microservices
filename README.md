@@ -1,4 +1,4 @@
-# 🚀 Cloud-Native Microservices Platform on Docker Swarm
+# Cloud-Native Microservices Platform on Docker Swarm
 ![Docker Swarm](https://img.shields.io/badge/Docker-Swarm-2496ED?logo=docker&logoColor=white)
 ![GitHub Actions](https://img.shields.io/badge/GitHub%20Actions-CI/CD-2088FF?logo=github-actions&logoColor=white)
 ![Next.js](https://img.shields.io/badge/Next.js-Frontend-000000?logo=next.js)
