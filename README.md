@@ -278,6 +278,6 @@ The deployment uses Docker Swarm rolling updates, ensuring zero-downtime deploym
 
 **Abubakar Alnour**
 
-Cloud Administrator | Azure Administrator (AZ-104) | Terraform Associate
+Cloud Engineer | Azure Administrator (AZ-104) | Terraform Associate
 
 Passionate about Cloud Infrastructure, Hybrid Environments, Automation, and DevOps.
